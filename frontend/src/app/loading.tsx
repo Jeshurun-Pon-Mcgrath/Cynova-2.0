@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="game-main" aria-busy="true"><div className="page-head"><div><span className="eyebrow">Opening realm</span><h1>Gathering starlight…</h1></div></div><div className="loading-grid"><div className="skeleton"/><div className="skeleton"/><div className="skeleton"/></div></main>}

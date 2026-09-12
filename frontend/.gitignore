@@ -1,0 +1,14 @@
+node_modules/
+.next/
+coverage/
+.env
+.env.*
+!.env.example
+.vercel/
+playwright-report/
+test-results/
+blob-report/
+*.trace.zip
+visual-qa/
+*.tsbuildinfo
+.vitest-secret-token

@@ -1,0 +1,1 @@
+import type { Metadata } from "next";import { CharacterView } from "@/features/character/character-view";export const metadata:Metadata={title:"Character"};export default function Page(){return <CharacterView/>}
