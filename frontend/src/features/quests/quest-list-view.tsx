@@ -13,7 +13,7 @@ import { useCompleteQuest } from "@/features/quests/use-complete-quest";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { Flip } from "@/lib/gsap/register";
 import { gameQueryKey, useGameQuery } from "@/lib/query/game-query";
-import { mockGameService, mockQuestService } from "@/services/mock/game-service";
+import { gameService, questService } from "@/services";
 import { ATTRIBUTES, type Difficulty, type Quest, type QuestStatus } from "@/types/domain";
 
 type DueFilter = "All" | "Today" | "This week" | "Overdue";
@@ -36,7 +36,7 @@ export function QuestListView() {
     return [...game.quests].filter((quest) => quest.title.toLowerCase().includes(query.toLowerCase()) && (status === "All" || visualStatus(quest) === status) && (attribute === "All" || quest.category === attribute) && (difficulty === "All" || quest.difficulty === difficulty) && (due === "All" || (due === "Today" && Date.parse(quest.dueAt) < endOfToday && Date.parse(quest.dueAt) >= startOfToday) || (due === "This week" && Date.parse(quest.dueAt) <= endOfWeek && Date.parse(quest.dueAt) >= filterReferenceTime) || (due === "Overdue" && visualStatus(quest) === "overdue"))).sort((a, b) => sort === "title" ? a.title.localeCompare(b.title) : sort === "difficulty" ? difficultyRank[b.difficulty] - difficultyRank[a.difficulty] : sort === "xp" ? b.xpReward - a.xpReward : Date.parse(a.dueAt) - Date.parse(b.dueAt));
   }, [game.quests, query, status, attribute, difficulty, due, sort]);
   const complete = useCompleteQuest();
-  const duplicate = useMutation({ mutationFn: (id: string) => mockQuestService.duplicate(id), onSuccess: async (quest) => { client.setQueryData(gameQueryKey, await mockGameService.getSnapshot()); toast.success(`Duplicated as “${quest.title}”.`); }, onError: (error) => toast.error(error instanceof Error ? error.message : "Could not duplicate quest.") });
+  const duplicate = useMutation({ mutationFn: (id: string) => questService.duplicate(id), onSuccess: async (quest) => { client.setQueryData(gameQueryKey, await gameService.getSnapshot()); toast.success(`Duplicated as “${quest.title}”.`); }, onError: (error) => toast.error(error instanceof Error ? error.message : "Could not duplicate quest.") });
   const clear = () => changeWithFlip(() => { setQuery(""); setStatus("All"); setAttribute("All"); setDifficulty("All"); setDue("All"); setSort("dueAt"); });
   const filters = <FilterControls status={status} setStatus={(value) => changeWithFlip(() => setStatus(value))} attribute={attribute} setAttribute={(value) => changeWithFlip(() => setAttribute(value))} difficulty={difficulty} setDifficulty={(value) => changeWithFlip(() => setDifficulty(value))} due={due} setDue={(value) => changeWithFlip(() => setDue(value))} sort={sort} setSort={(value) => changeWithFlip(() => setSort(value))} clear={clear}/>;
 

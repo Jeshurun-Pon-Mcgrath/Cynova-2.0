@@ -4,13 +4,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { applyQuestCompletion } from "@/lib/game-engine";
 import { achievementQueryKey, gameQueryKey } from "@/lib/query/game-query";
-import { mockQuestService } from "@/services/mock/game-service";
+import { questService } from "@/services";
 import type { CompletionReward, GameSnapshot } from "@/types/domain";
 
 export function useCompleteQuest(options?: { onReward?: (reward: CompletionReward) => void }) {
   const client = useQueryClient();
   return useMutation({
-    mutationFn: (questId: string) => mockQuestService.complete(questId),
+    mutationFn: (questId: string) => questService.complete(questId),
     onMutate: async (questId) => {
       await client.cancelQueries({ queryKey: gameQueryKey });
       const previous = client.getQueryData<GameSnapshot>(gameQueryKey);

@@ -1,11 +1,26 @@
-import type { Achievement, Archetype, Attribute, CompletionReward, GameSnapshot, Quest, QuestInput, Reward, User } from "@/types/domain";
+import type {
+  Achievement,
+  Archetype,
+  Attribute,
+  CompletionReward,
+  GameSnapshot,
+  Quest,
+  QuestInput,
+  Reward,
+  User,
+  UserPreferences,
+} from "@/types/domain";
 
 export interface AuthService {
   signIn(email: string, password: string): Promise<User>;
   register(name: string, email: string, password: string): Promise<User>;
   enterDemo(): Promise<User>;
+  forgotPassword(email: string): Promise<void>;
+  logout(): Promise<void>;
 }
-export interface GameService { getSnapshot(): Promise<GameSnapshot> }
+export interface GameService {
+  getSnapshot(): Promise<GameSnapshot>;
+}
 export interface QuestService {
   list(): Promise<Quest[]>;
   get(id: string): Promise<Quest | null>;
@@ -16,10 +31,29 @@ export interface QuestService {
   complete(id: string): Promise<CompletionReward>;
 }
 export interface PlayerService {
-  completeOnboarding(input: { name: string; archetype: Archetype; focusAreas: Attribute[]; dailyQuestTarget: number }): Promise<GameSnapshot>;
+  completeOnboarding(input: {
+    name: string;
+    archetype: Archetype;
+    focusAreas: Attribute[];
+    dailyQuestTarget: number;
+  }): Promise<GameSnapshot>;
   updateName(name: string): Promise<GameSnapshot>;
 }
-export interface RewardService { list(): Promise<Reward[]>; purchase(id: string): Promise<GameSnapshot> }
-export interface InventoryService { equip(id: string): Promise<GameSnapshot>; unequip(id: string): Promise<GameSnapshot> }
-export interface AchievementService { list(): Promise<Achievement[]> }
-export interface SkillService { upgrade(id: string): Promise<GameSnapshot> }
+export interface RewardService {
+  list(): Promise<Reward[]>;
+  purchase(id: string): Promise<GameSnapshot>;
+}
+export interface InventoryService {
+  equip(id: string): Promise<GameSnapshot>;
+  unequip(id: string): Promise<GameSnapshot>;
+}
+export interface AchievementService {
+  list(): Promise<Achievement[]>;
+}
+export interface SkillService {
+  upgrade(id: string): Promise<GameSnapshot>;
+}
+export interface PreferenceService {
+  get(): Promise<UserPreferences>;
+  update(preferences: Partial<UserPreferences>): Promise<UserPreferences>;
+}

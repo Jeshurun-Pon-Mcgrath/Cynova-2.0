@@ -1,23 +1,212 @@
-import { Brain, Dumbbell, HeartPulse, MessageCircle, Palette, ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  Brain,
+  Dumbbell,
+  HeartPulse,
+  MessageCircle,
+  Palette,
+  ShieldCheck,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
+import { DemoRealmButton } from "@/components/auth/demo-realm-button";
 import { MarketingNav } from "@/components/layout/marketing-nav";
+import { Logo } from "@/components/layout/logo";
+import { ActionPreview } from "@/components/motion/action-preview";
+import { ProgressionStory } from "@/components/motion/progression-story";
 import { Reveal } from "@/components/motion/reveal";
 import { SceneShell } from "@/components/three/scene-shell";
-import { Progress } from "@/components/ui/progress";
-import { DemoRealmButton } from "@/components/auth/demo-realm-button";
-import { ProgressionStory } from "@/components/motion/progression-story";
 
-const attributes = [["Intellect",Brain],["Strength",Dumbbell],["Vitality",HeartPulse],["Charisma",MessageCircle],["Creativity",Palette],["Discipline",ShieldCheck]] as const;
+const attributes = [
+  ["Intellect", Brain],
+  ["Strength", Dumbbell],
+  ["Vitality", HeartPulse],
+  ["Charisma", MessageCircle],
+  ["Creativity", Palette],
+  ["Discipline", ShieldCheck],
+] as const;
+
+const uses = [
+  ["Study", BookOpen],
+  ["Train", Dumbbell],
+  ["Create", Palette],
+  ["Recover", HeartPulse],
+] as const;
+
 export default function LandingPage() {
-  return <><a className="skip-link" href="#main">Skip to content</a><MarketingNav/><main id="main">
-    <section className="hero"><div className="hero-copy"><p className="eyebrow">A life powered by purpose</p><h1 className="display">Your life. Your quests. <em>Your legend.</em></h1><p>Turn studying, training, creating, and caring for yourself into a living adventure. Every real action strengthens the hero only you can become.</p><div className="hero-actions"><Link className="button button-primary" href="/register">Begin your journey <span aria-hidden="true">→</span></Link><DemoRealmButton/></div><div className="proof-row" aria-label="Core features"><span>✦ XP progression</span><span>♢ Streaks</span><span>⌁ Attribute growth</span><span>◈ Real rewards</span></div></div><div className="hero-visual"><SceneShell/><span className="sr-only">A floating crystal Nova Core grows brighter as your character progresses.</span></div></section>
-    <Reveal><section id="how" className="section"><div className="section-head"><p className="eyebrow">The daily loop</p><h2>Small actions. Visible momentum.</h2><p>Cynova turns intention into a rewarding loop you can understand at a glance—without hiding the real work behind game mechanics.</p></div><div className="card-grid">{[["01","Choose a quest","Turn one meaningful action into a clear, achievable quest."],["02","Do the real work","Complete it offline—in the library, gym, studio, or wherever life happens."],["03","Evolve your realm","Earn XP, gold, attributes, streaks, and a brighter Nova Core."]].map(([n,h,p])=><article className="panel feature-card" key={n}><span className="number">{n}</span><h3>{h}</h3><p>{p}</p></article>)}</div></section></Reveal>
-    <Reveal><section id="attributes" className="section"><div className="section-head"><p className="eyebrow">Build the whole hero</p><h2>Six attributes. One evolving character.</h2><p>Your quest choices tell the story of who you are becoming. Balance your realm or lean into a personal mastery path.</p></div><div className="attribute-grid">{attributes.map(([name,Icon])=><article className="panel attribute-card" key={name}><span className="attribute-icon"><Icon/></span><strong>{name}</strong></article>)}</div></section></Reveal>
-    <Reveal><section id="features" className="section"><div className="section-head"><p className="eyebrow">Your command centre</p><h2>Know exactly what moves your story forward.</h2></div><div className="panel" style={{padding:"28px"}}><div className="page-head"><div><span className="eyebrow">Day 18 • Aetherfall</span><h2 style={{fontSize:"1.6rem"}}>Good evening, Arin.</h2><p>Your Nova Core needs 160 XP to reach level 13.</p></div><span className="hud-pill gold">1,260 gold</span></div><div className="stat-grid"><article className="panel stat"><span className="stat-label">Level</span><strong>12</strong></article><article className="panel stat"><span className="stat-label">Current streak</span><strong>18 days</strong></article><article className="panel stat"><span className="stat-label">Today</span><strong>3 / 7</strong></article><article className="panel stat"><span className="stat-label">Consistency</span><strong>86%</strong></article></div><div className="panel"><div className="level-row"><span>840 XP</span><strong>Level 13 at 1,000</strong></div><Progress value={84} label="840 of 1000 experience points"/></div></div></section></Reveal>
-    <ProgressionStory/>
-    <Reveal><section id="rewards" className="section"><div className="section-head"><p className="eyebrow">Earn your atmosphere</p><h2>Rewards that make progress feel personal.</h2></div><div className="card-grid"><article className="panel feature-card"><span className="rarity">Rare theme</span><h3>Moonlit Realm</h3><p>A calm indigo sanctuary for focused evenings.</p><span className="price">650 gold</span></article><article className="panel feature-card"><span className="rarity Legendary">Legendary title</span><h3>The Unbroken</h3><p>A title forged through sustained discipline.</p><span className="price">1,800 gold</span></article><article className="panel feature-card"><span className="rarity">Core skin</span><h3>Solar Flare</h3><p>A warm, radiant core for long-running streaks.</p><span className="price">1,100 gold</span></article></div></section></Reveal>
-    <section className="section"><div className="card-grid"><article className="panel"><ShieldCheck className="cyan"/><h3>Accessible by design</h3><p className="muted">Keyboard-ready controls, readable contrast, text chart equivalents, and motion that respects your preferences.</p></article><article className="panel"><Sparkles className="cyan"/><h3>Atmosphere, not friction</h3><p className="muted">Optional lightweight 3D enhances progression while every feature remains usable without WebGL.</p></article><article className="panel"><Trophy className="cyan"/><h3>Your effort stays real</h3><p className="muted">Cynova rewards what happens away from the screen—the app is the mirror, not the destination.</p></article></div></section>
-    <section className="section"><div className="cta-banner"><p className="eyebrow">Your first quest awaits</p><h2>The next level is built in real life.</h2><Link className="button button-primary" href="/register">Begin your journey</Link></div></section>
-  </main><footer className="footer"><div className="footer-inner"><LogoFooter/><p>© 2026 Cynova. Built for real-world momentum.</p><div><Link href="/settings">Accessibility</Link> · <Link href="/login">Sign in</Link></div></div></footer></>;
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <MarketingNav />
+      <main id="main">
+        <section className="hero">
+          <div className="hero-copy">
+            <p className="eyebrow">A practical life RPG</p>
+            <h1 className="display">
+              Turn the work you already do into <em>quests you can finish.</em>
+            </h1>
+            <p>
+              Plan a real task, complete it away from the screen, and record the
+              progress in one focused place. Cynova makes effort visible without
+              pretending the game is the work.
+            </p>
+            <div className="hero-actions">
+              <Link className="button button-primary" href="/register">
+                Create your first quest <ArrowRight aria-hidden="true" />
+              </Link>
+              <DemoRealmButton />
+            </div>
+            <div className="use-row" aria-label="Useful for">
+              {uses.map(([label, Icon]) => (
+                <span key={label}>
+                  <Icon aria-hidden="true" /> {label}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="hero-visual">
+            <SceneShell />
+            <span className="sr-only">
+              A floating crystal Nova Core becomes brighter as quests are
+              completed.
+            </span>
+          </div>
+        </section>
+
+        <Reveal>
+          <section id="how" className="section">
+            <div className="section-head">
+              <p className="eyebrow">The daily loop</p>
+              <h2>Small actions. Visible momentum.</h2>
+              <p>
+                Write down one meaningful action, do it in real life, then mark
+                it complete. The interface responds only when you act.
+              </p>
+            </div>
+            <div className="card-grid">
+              {[
+                [
+                  "01",
+                  "Choose a quest",
+                  "Make the next action specific and achievable.",
+                ],
+                [
+                  "02",
+                  "Do the real work",
+                  "Step away and finish it where life happens.",
+                ],
+                [
+                  "03",
+                  "Record the result",
+                  "Mark it complete and see your character respond.",
+                ],
+              ].map(([number, heading, copy]) => (
+                <article className="panel feature-card" key={number}>
+                  <span className="number">{number}</span>
+                  <h3>{heading}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        </Reveal>
+
+        <Reveal>
+          <section id="attributes" className="section">
+            <div className="section-head">
+              <p className="eyebrow">Build the whole hero</p>
+              <h2>Six attributes show where your effort goes.</h2>
+              <p>
+                Each quest belongs to a clear area of life, so your character
+                reflects the work you actually choose to do.
+              </p>
+            </div>
+            <div className="attribute-grid">
+              {attributes.map(([name, Icon]) => (
+                <article className="panel attribute-card" key={name}>
+                  <span className="attribute-icon">
+                    <Icon aria-hidden="true" />
+                  </span>
+                  <strong>{name}</strong>
+                </article>
+              ))}
+            </div>
+          </section>
+        </Reveal>
+
+        <Reveal>
+          <section id="features" className="section">
+            <div className="section-head">
+              <p className="eyebrow">Action-driven feedback</p>
+              <h2>Try the completion interaction.</h2>
+              <p>
+                Feedback is brief, tactile, and tied to your input. Nothing
+                moves just to compete for attention.
+              </p>
+            </div>
+            <ActionPreview />
+          </section>
+        </Reveal>
+
+        <ProgressionStory />
+
+        <Reveal>
+          <section id="rewards" className="section">
+            <div className="section-head">
+              <p className="eyebrow">Progress with a purpose</p>
+              <h2>The game layer supports the habit.</h2>
+            </div>
+            <div className="card-grid">
+              <article className="panel principle-card">
+                <ShieldCheck className="cyan" aria-hidden="true" />
+                <h3>Clear before clever</h3>
+                <p>
+                  Quest status, deadlines, and next actions stay easy to scan.
+                </p>
+              </article>
+              <article className="panel principle-card">
+                <Trophy className="cyan" aria-hidden="true" />
+                <h3>Rewards follow effort</h3>
+                <p>
+                  Progress changes after a completed action, never on a timer.
+                </p>
+              </article>
+              <article className="panel principle-card">
+                <HeartPulse className="cyan" aria-hidden="true" />
+                <h3>Built for real routines</h3>
+                <p>
+                  Motion is short, optional, and removed when reduced motion is
+                  enabled.
+                </p>
+              </article>
+            </div>
+          </section>
+        </Reveal>
+
+        <section className="section">
+          <div className="cta-banner">
+            <p className="eyebrow">Start with one real action</p>
+            <h2>Write the quest. Do the work. Record the win.</h2>
+            <Link className="button button-primary" href="/register">
+              Create your first quest
+            </Link>
+          </div>
+        </section>
+      </main>
+      <footer className="footer">
+        <div className="footer-inner">
+          <Logo />
+          <p>© 2026 Cynova. Built for real-world momentum.</p>
+          <nav className="footer-links" aria-label="Legal and account">
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/login">Sign in</Link>
+          </nav>
+        </div>
+      </footer>
+    </>
+  );
 }
-function LogoFooter(){return <Link href="/" className="logo"><span className="logo-mark">✦</span><span>CYNOVA</span></Link>}

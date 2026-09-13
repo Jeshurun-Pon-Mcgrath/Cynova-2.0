@@ -1,1 +1,17 @@
-{"name":"Cynova — Life RPG","short_name":"Cynova","description":"Turn your real life into your greatest adventure.","start_url":"/","display":"standalone","background_color":"#070A12","theme_color":"#070A12","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "Cynova | Life RPG",
+  "short_name": "Cynova",
+  "description": "Plan real tasks, complete them, and make your effort visible.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070A12",
+  "theme_color": "#070A12",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
